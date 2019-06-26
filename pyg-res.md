@@ -6,12 +6,13 @@
 
 ```python
 #!/usr/bin/python3
-import inspect
+#import inspect
 
 class Resource:
 
 	def __init__(self):
-		self.parent = inspect.getmodule(inspect.stack()[1][0])
+		#self.parent = inspect.getmodule(inspect.stack()[1][0])
+		pass
 
 	def w2b(self, value):
 		return bytes([ value & 0xff , (value & 0xff00) >> 8 ])
@@ -58,3 +59,4 @@ class Resource:
 ## ボディー読み込み部分を作らないといけない。
 
 ということでその辺りもぼちぼちと
+** ていうかなんでinspectなんて入ってるんだ ** なにか実験してたのはうっすら記憶にあるけど…。
