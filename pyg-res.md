@@ -6,13 +6,22 @@
 
 ```python
 #!/usr/bin/python3
-#import inspect
 
 class Resource:
 
-	def __init__(self):
-		#self.parent = inspect.getmodule(inspect.stack()[1][0])
-		pass
+	def __init__(self,res=""):
+		if res !="":
+			self._resFile = res
+			with open(self._resFile,"rb") as f:
+				self._index = self.getHeader(f)
+
+	def get(self,resName):
+		_idx,_size = self._index[resName]
+		_idx += self._size + 2
+		with open(self._resFile,"rb") as f:
+			f.seek(_idx)
+			data = f.read(_size)
+		return data
 
 	def w2b(self, value):
 		return bytes([ value & 0xff , (value & 0xff00) >> 8 ])
@@ -27,36 +36,24 @@ class Resource:
 		return eval(data.decode())
 
 	def size(self, data):
-		return w2b(len(data))
-
-	def getSize(self, file):
-		return b2w(file.read(2))
+		return self.w2b(len(data))
 
 	def getHeader(self, file):
-		size = getSize(file)
-		head = file.read(size)
-		return b2d(head)
+		self._size = self.b2w(file.read(2))
+		head = file.read(self._size)
+		return self.b2d(head)
 
 	def test(self):
 		data = {"res1":(0,100), "res2":(100,104)}
-		d = d2b(data)
+		d = self.d2b(data)
 		with open("data.res","wb") as f:
-			f.write(size(d))
+			f.write(self.size(d))
 			f.write(d)
+			f.write(bytes([0xff]*100))
+			f.write(bytes([0x55]*104))
 
-	def readTest(self):
-		with open("data.res","rb") as f:
-			h = getHeader(f)
-			print(h)
 ```
 
-現状ヘッダを読むくらいまでしか出来ていない。
+半端な状態で放置されていたので一気に動くように修正した。
 
-ヘッダの情報はリソース名（ID）、先頭アドレス、サイズ（バイト）となっている。
-
-ヘッダの先頭２バイトはヘッダのサイズ（バイト）を書き込む。ヘッダデータが64Kbyteまでという制限がある。これは実際のリソースファイル全体の容量ではなくあくまでヘッダが64Kbyteまでということで。作っている本人も混乱したので忘れないように書いておく。
-
-## ボディー読み込み部分を作らないといけない。
-
-ということでその辺りもぼちぼちと
-ていうかなんでinspectなんて入ってるんだ なにか実験してたのはうっすら記憶にあるけど…。
+データを作る処理については *test* の通り。いちいちプログラム書くのは面倒なのでassetディレクトリの中身をリソースファイルにまとめるようなツールを作っておいたほうがよさそう。
