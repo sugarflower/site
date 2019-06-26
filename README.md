@@ -6,5 +6,6 @@ google不信からgithub.ioへの乗り換えを試みている。
 
 ## メモランダム
 
+- [Python](python.md)
 - [pyg / res](pyg-res.md)
 
