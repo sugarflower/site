@@ -1,9 +1,10 @@
-# 更新テスト。
+# sugarflowerの補助脳
 
-ひとまずの更新テスト。
+google不信からgithub.ioへの乗り換えを試みている。
+まだローカルでコンテンツをまとめる仕組みは出来ていないのでその辺りもゆくゆくはしっかりやってゆきたい。
 
-```python
-import sys
-sys.modules.pop(MODULE NAME)
-```
-<b>マークダウン中に<i>HTML</i></b>
+
+## メモランダム
+
+- [pyg / res](pyg-res.md)
+
