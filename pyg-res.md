@@ -113,8 +113,6 @@ for i in d:
 		size = os.stat(assetDir + os.sep + i)[6]
 		h[i] = (binCount,size)
 		binCount += size
-	else:
-		d.remove(i)
 
 headBin = str(h).encode()
 value = len(headBin)
@@ -124,9 +122,11 @@ with open(outFile,"wb") as f:
 	f.write(headSize)
 	f.write(headBin)
 	for i in d:
-		with open(assetDir + os.sep + i,"rb") as f2:
-			data = f2.read()
-			f.write(data)
+		if os.path.isfile(assetDir + os.sep + i):
+			with open(assetDir + os.sep + i,"rb") as f2:
+				data = f2.read()
+				f.write(data)
+
 ```
 
 ということで泥臭く実装。
