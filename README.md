@@ -7,7 +7,7 @@ google不信からgithub.ioへの乗り換えを試みている。
 ## メモランダム
 
 - [Python](python.md)
-- pyg
--- [pyg / font](./font)
--- [pyg / res](pyg-res.md)
+
+- [pyg / font](./font)
+- [pyg / res](pyg-res.md)
 
