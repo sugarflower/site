@@ -12,7 +12,7 @@ parent = inspect.getmodule(inspect.stack()[6][0])
 
 おおよそメインのスクリプトから「親」を参照するように指示があってから参照、実行すれば問題は無いと思う。
 
-/
+\
 
 ## Python.hの在り処
 
