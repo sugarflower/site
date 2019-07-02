@@ -5,8 +5,20 @@
 
 ```python
 import inspect
-parent = inspect.getmodule(inspect.stack()[6][0])
+parent = inspect.getmodule(inspect.stack()[n][0])
 ```
+
+呼び出し方によりnが変動する場合があるので注意が必要。
+親から直接呼ばれた自身から親を参照する場合、多分 n = 2 だと思う。
+
+"""
+c = 0
+for s in inspect.stack():
+	print( c, s , "\n" )
+	c += 1
+"""
+
+などと実際に動かしてみて```filename=```親モジュール と有る行が何番目か確認するのが確実だけれども、そういったところでかなり扱いが難しいので多用は無用。いらないトラブルのもとになる。
 
 注意点として、親がまだ参照出来ていないモジュールやファンクションにはアクセス出来ないというタイミング的な話が出てくる。
 
